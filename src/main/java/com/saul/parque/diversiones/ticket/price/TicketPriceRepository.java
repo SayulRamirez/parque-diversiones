@@ -12,4 +12,6 @@ public interface TicketPriceRepository extends JpaRepository<TicketPrice, Long> 
     Optional<TicketPrice> findByIsCurrentIsTrueAndType(TicketType type);
 
     List<TicketPrice> findAllByIsCurrentIsTrue();
+
+    Optional<TicketPrice> findByIdAndIsCurrentIsTrue(Long id);
 }
