@@ -6,11 +6,11 @@ import jakarta.validation.constraints.Positive;
 
 public record TicketPriceRequest(
 
-        @NotNull(message = "el campo no debe de estar vacío o nulo")
+        @NotNull(message = "{field.not.null}")
         TicketType type,
 
-        @NotNull(message = "el campo no debe de estar vacío")
-        @Positive(message = "el campo debe de ser mayor a cero")
+        @NotNull(message = "{field.not.null}")
+        @Positive(message = "{field.positive}")
         double price
 ) {
 }
