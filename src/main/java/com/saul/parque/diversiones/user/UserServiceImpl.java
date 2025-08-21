@@ -5,6 +5,8 @@ import com.saul.parque.diversiones.dto.user.UserRequest;
 import com.saul.parque.diversiones.dto.user.UserResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
@@ -14,6 +16,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
 
@@ -33,6 +37,8 @@ public class UserServiceImpl implements UserService {
         String username = generateUsername(request, user.getId());
 
         user.setUsername(username);
+
+        log.info("User create with id: {}", user.getId());
 
         return fromEntity(userRepository.save(user));
     }
@@ -61,6 +67,8 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(request.password());
 
+        log.info("Update password with id: {}", user.getId());
+
         return fromEntity(userRepository.save(user));
     }
 
@@ -70,6 +78,9 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new EntityNotFoundException("no se encontro el usuario con id: " + id));
 
         user.setEnabled(enabled);
+
+        log.info("Update enabled user with id: {}", user.getId());
+
         userRepository.save(user);
     }
 

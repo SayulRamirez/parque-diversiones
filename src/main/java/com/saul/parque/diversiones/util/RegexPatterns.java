@@ -1,6 +1,6 @@
 package com.saul.parque.diversiones.util;
 
-public class RegexPatteners {
+public class RegexPatterns {
 
     public static final String PASSWORD_VALID = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 

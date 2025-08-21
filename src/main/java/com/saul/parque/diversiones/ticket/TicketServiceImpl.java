@@ -8,6 +8,8 @@ import com.saul.parque.diversiones.ticket.price.TicketPriceRepository;
 import com.saul.parque.diversiones.ticket.price.TicketType;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,8 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class TicketServiceImpl implements TicketService {
+
+    private final Logger log = LoggerFactory.getLogger(TicketServiceImpl.class);
 
     private final TicketRepository ticketRepository;
 
@@ -54,6 +58,8 @@ public class TicketServiceImpl implements TicketService {
 
                 Ticket save = ticketRepository.save(ticket);
 
+                log.info("Add ticket type {} with id {}", ticket.getPrice().getType(), ticket.getId());
+
                 response.add(fromEntity(save));
             }
         });
@@ -63,6 +69,8 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public SaleTicketResponse getSaleBetween(LocalDate startRequest, LocalDate endRequest) {
+
+        if (endRequest.isBefore(startRequest)) throw new IllegalArgumentException("la fecha de inicio no debe de ser despues de la fecha final");
 
         LocalDateTime start = LocalDateTime.of(startRequest, LocalTime.MIDNIGHT);
         LocalDateTime end = LocalDateTime.of(endRequest, LocalTime.MAX);
