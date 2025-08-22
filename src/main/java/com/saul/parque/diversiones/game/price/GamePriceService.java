@@ -1,4 +1,4 @@
-package com.saul.parque.diversiones.game;
+package com.saul.parque.diversiones.game.price;
 
 import java.util.List;
 

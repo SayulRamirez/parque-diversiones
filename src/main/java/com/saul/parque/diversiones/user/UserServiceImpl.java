@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.Normalizer;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public UserResponse create(UserRequest request) {
         LocalDateTime now = LocalDateTime.now();
@@ -59,6 +61,7 @@ public class UserServiceImpl implements UserService {
                 .map(this::fromEntity).toList();
     }
 
+    @Transactional
     @Override
     public UserResponse updatePassword(UpdatePassRequest request) {
 
@@ -72,6 +75,7 @@ public class UserServiceImpl implements UserService {
         return fromEntity(userRepository.save(user));
     }
 
+    @Transactional
     @Override
     public void enbledUser(Long id, boolean enabled) {
         User user = userRepository.findById(id)
