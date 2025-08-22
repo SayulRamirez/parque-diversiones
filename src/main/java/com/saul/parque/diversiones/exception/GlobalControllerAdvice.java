@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -68,6 +68,34 @@ public class GlobalControllerAdvice {
         return new ApiError(
                 HttpStatus.BAD_REQUEST.value(),
                 Errors.ILLEGAL_ARGUMENT_EXCEPTION.getValue(),
+                e.getMessage(),
+                request.getRequestURI(),
+                LocalDateTime.now());
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ApiError handleDateTimeParseException(DateTimeParseException e, HttpServletRequest request) {
+        log.warn("{} in {}", e.getMessage(), request.getRequestURI());
+
+        return new ApiError(
+                HttpStatus.BAD_REQUEST.value(),
+                Errors.DATE_INVALID_EXCEPTION.getValue(),
+                "formato esperado HH:mm",
+                request.getRequestURI(),
+                LocalDateTime.now());
+    }
+
+    @ExceptionHandler(DateInvalidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ApiError handleDateInvalidException(DateInvalidException e, HttpServletRequest request) {
+        log.warn("{} in {}", e.getMessage(), request.getRequestURI());
+
+        return new ApiError(
+                HttpStatus.BAD_REQUEST.value(),
+                Errors.DATE_INVALID_EXCEPTION.getValue(),
                 e.getMessage(),
                 request.getRequestURI(),
                 LocalDateTime.now());

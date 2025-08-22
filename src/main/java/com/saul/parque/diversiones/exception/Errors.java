@@ -7,7 +7,9 @@ public enum Errors {
 
     ENTITY_NOT_FOUND("entidad no encontrada"),
 
-    ILLEGAL_ARGUMENT_EXCEPTION("argumentos malformados");
+    ILLEGAL_ARGUMENT_EXCEPTION("argumentos malformados"),
+
+    DATE_INVALID_EXCEPTION("fecha invalida");
 
     private final String value;
 
