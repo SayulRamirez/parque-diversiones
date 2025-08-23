@@ -82,7 +82,7 @@ public class GlobalControllerAdvice {
         return new ApiError(
                 HttpStatus.BAD_REQUEST.value(),
                 Errors.DATE_INVALID_EXCEPTION.getValue(),
-                "formato esperado HH:mm",
+                "el formato no es el esperado",
                 request.getRequestURI(),
                 LocalDateTime.now());
     }
