@@ -1,7 +1,7 @@
 package com.saul.parque.diversiones.game.ticket.price;
 
-import com.saul.parque.diversiones.dto.game.price.GamePriceRequest;
-import com.saul.parque.diversiones.dto.game.price.GamePriceResponse;
+import com.saul.parque.diversiones.dto.game.ticket.price.GamePriceRequest;
+import com.saul.parque.diversiones.dto.game.ticket.price.GamePriceResponse;
 import com.saul.parque.diversiones.game.Game;
 import com.saul.parque.diversiones.game.GameRepository;
 import jakarta.persistence.EntityNotFoundException;

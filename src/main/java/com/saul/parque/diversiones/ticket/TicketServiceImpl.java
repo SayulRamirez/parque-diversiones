@@ -50,17 +50,16 @@ public class TicketServiceImpl implements TicketService {
             for (int i = 0; i < request.get(key); i++) {
                 LocalDateTime now = LocalDateTime.now();
 
-                Ticket ticket = Ticket.builder()
+                Ticket ticket = ticketRepository.save(Ticket.builder()
                         .price(ticketPrice)
                         .saleDate(now)
-                        .ticketNumber(generateTicket(now, key))
-                        .build();
+                        .build());
 
-                Ticket save = ticketRepository.save(ticket);
+                ticket.setTicketNumber(generateTicket(now, ticket.getId()));
 
                 log.info("Add ticket type {} with id {}", ticket.getPrice().getType(), ticket.getId());
 
-                response.add(fromEntity(save));
+                response.add(fromEntity(ticketRepository.save(ticket)));
             }
         });
 

@@ -15,7 +15,7 @@ public abstract class GeneralTicket {
     @Column(name = "sale_date", nullable = false)
     private LocalDateTime saleDate;
 
-    @Column(name = "ticket_number", unique = true, nullable = false)
+    @Column(name = "ticket_number", unique = true)
     private String ticketNumber;
 
     public GeneralTicket () {}

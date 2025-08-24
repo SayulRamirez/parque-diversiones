@@ -1,4 +1,4 @@
-package com.saul.parque.diversiones.dto.game.price;
+package com.saul.parque.diversiones.dto.game.ticket.price;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

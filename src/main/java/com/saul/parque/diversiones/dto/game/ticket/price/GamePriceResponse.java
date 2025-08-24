@@ -1,4 +1,4 @@
-package com.saul.parque.diversiones.dto.game.price;
+package com.saul.parque.diversiones.dto.game.ticket.price;
 
 import java.time.LocalDateTime;
 
